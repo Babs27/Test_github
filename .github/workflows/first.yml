@@ -27,10 +27,16 @@ jobs:
       - name: Wait for MySQL
         run: sleep 10
         
+      - name: Create products table
+        run: |
+          mysql -h 127.0.0.1 -u root stock_db_test -e "
+            CREATE TABLE IF NOT EXISTS produits (
+              id INT AUTO_INCREMENT PRIMARY KEY,
+              nom VARCHAR(100) NOT NULL,
+              prix DECIMAL(10,2),
+              stock INT
+            );
+          "
+        
       - name: Run PHPUnit tests
-        env:
-          DB_HOST: 127.0.0.1
-          DB_USERNAME: root
-          DB_PASSWORD: ""
-          DB_DATABASE: stock_db_test
         run: php vendor/phpunit/phpunit/phpunit --testdox
