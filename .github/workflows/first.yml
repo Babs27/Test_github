@@ -24,22 +24,13 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
         
-      - name: Wait for MySQL to be ready
-        run: |
-          while ! mysqladmin ping -h"127.0.0.1" -P"3306" -u"root" -p"root" --silent; do
-            sleep 1
-          done
-          
-      - name: Create test database
-        run: |
-          mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS test_db;"
-          mysql -h 127.0.0.1 -u root -proot -e "SHOW DATABASES;"
+      - name: Wait for MySQL
+        run: sleep 10
         
       - name: Run PHPUnit tests
         env:
           DB_HOST: 127.0.0.1
-          DB_PORT: 3306
-          DB_DATABASE: stock_db_test
           DB_USERNAME: root
           DB_PASSWORD: ""
+          DB_DATABASE: stock_db_test
         run: php vendor/phpunit/phpunit/phpunit --testdox
