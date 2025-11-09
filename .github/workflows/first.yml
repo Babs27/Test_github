@@ -1,24 +1,18 @@
-Nom : Tests PHPUnit
+name: PHPUnit Tests
+on: [push, pull_request]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-sur : [push, pull_request]
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
 
-emplois :
-  tests :
-    fonctionne sous : ubuntu-latest
-    
-    étapes :
-    - utilise : actions/checkout@v4
-    
-    - nom : Configuration PHP
-      utilise : shivammathur/setup-php@v2
-      avec :
-        version PHP : '8.2'
-    
-    - nom : Installer les dépendances
-      run : composer install --prefer-dist --no-progress --no-suggest
-    
-    - nom : Donner les permissions d'exécution
-      run : chmod +x vendor/bin/phpunit
-    
-    - nom : Exécuter les tests PHPUnit
-      run : vendor/bin/phpunit --testdox
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHPUnit tests
+        run: php vendor/phpunit/phpunit/phpunit --testdox
