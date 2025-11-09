@@ -34,7 +34,7 @@ jobs:
               id INT AUTO_INCREMENT PRIMARY KEY,
               nom VARCHAR(100) NOT NULL,
               prix DECIMAL(10,2),
-              stock INT
+              quantite INT  -- ← SEULEMENT les colonnes utilisées par votre code
             );
           "
         
