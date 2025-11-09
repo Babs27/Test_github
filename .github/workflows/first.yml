@@ -7,6 +7,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
+          MYSQL_RANDOM_ROOT_PASSWORD: yes
           MYSQL_DATABASE: stock_db_test
         ports:
           - 3306:3306
