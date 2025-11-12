@@ -1,0 +1,18 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+    - run: composer install
+
+tests:
+  needs: build
+  runs-on: ubuntu-latest
+  steps:
+    - run: vendor/bin/phpunit
+
+quality:
+  needs: tests
+  runs-on: ubuntu-latest
+  steps:
+    - run: vendor/bin/phpstan analyse
