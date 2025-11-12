@@ -1,0 +1,8 @@
+- name: Setup .env
+  run: cp .env.example .env
+
+- name: Generate app key
+  run: php artisan key:generate
+
+- name: Run Laravel tests
+  run: php artisan test --coverage-clover=coverage.xml
