@@ -1,0 +1,2 @@
+- name: Deploy to Render
+  run: curl -X POST ${{ secrets.DEPLOY_HOOK }}
